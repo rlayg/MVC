@@ -184,8 +184,35 @@ public class MemberDao {
 		
 		return result;
 	}
+	/*
 	
+	 public List<Member> list() {
+        List<Member> members = new ArrayList<>();
+        try {
+            // Create statement and execute SELECT query
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM members");
+            
+            // Iterate through result set and create Member objects for each row
+            while (rs.next()) {
+                Member member = new Member();
+                member.setId(rs.getInt("id"));
+                member.setName(rs.getString("name"));
+                member.setAddress(rs.getString("address"));
+                member.setTel(rs.getString("tel"));
+                member.setReg_date(rs.getDate("reg_date"));
+                members.add(member);
+            }
+            
+            // Close statement and result set
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return members;
+    }
 	
 
-	
+	*/
 }
