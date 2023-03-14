@@ -31,7 +31,9 @@
 		  <a href="deleteForm.jsp" 	class="btn btn-primary">회원탈퇴</a>
 		  
 		</div>
-			
+		<div>
+			<img alt="회원이미지" src="image/Image20230314091510.jpg">
+		</div>	
 	</div>
 	<div id="footer">
 		<h2>푸터</h2>

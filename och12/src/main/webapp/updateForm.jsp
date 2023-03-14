@@ -1,4 +1,6 @@
+<%@page import="och12.MemberDto"%>
 <%@page import="och12.MemberDao"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="memberCheck.jsp" %>    
@@ -17,14 +19,15 @@
 	<%
 		MemberDao md = MemberDao.getInstance();
 	//HW3
-		MemberDao memberDao = md.select(id);
+		MemberDto memberDto = md.select(id);
+	
 	%>
 	<h2>회원정보 수정</h2>
 	<form action="updatePro.jsp">
 		<table border="1" id="table">
 			<tr>
 				<td>아이디</td>
-				<td><%=id %><input type="hidden" class="id" name="id" id="id" value="<%=memberDao.getId() %>"></td>
+				<td><%=id %><input type="hidden" class="id" name="id" id="id" value="<%=memberDto.getId() %>"></td>
 			</tr>
 			<tr>
 				<td>암호</td>
@@ -32,19 +35,19 @@
 			</tr>
 			<tr>
 				<td>이름</td>
-				<td><input type="text" name="name" required="required" value="<%=memberDao.getName()%>"></td>
+				<td><input type="text" name="name" required="required" value="<%=memberDto.getName()%>"></td>
 			</tr>
 			<tr>
 				<td>주소</td>
-				<td><input type="text" name="address" required="required" value="<%=memberDao.getAddress() %>"></td>
+				<td><input type="text" name="address" required="required" value="<%=memberDto.getAddress() %>"></td>
 			</tr>
 			<tr>
 				<td>전화번호</td>
-				<td><input type="tel" name="tel" required="required" pattern="\d{2,3}-\d{3,4}-\d{4}" value="<%=memberDao.getTel() %>"></td>
+				<td><input type="tel" name="tel" required="required" pattern="\d{2,3}-\d{3,4}-\d{4}" value="<%=memberDto.getTel() %>"></td>
 			</tr>
 			<tr>
 				<td>날짜</td>
-				<td>"<%=memberDao.getReg_date() %>"</td>
+				<td>"<%=memberDto.getReg_date() %>"</td>
 			</tr>
 			<tr>
 				<td><input type="submit" value="확인"></td>
