@@ -1,3 +1,3 @@
 # MVC
-MVC model1 model2
-och12 -> model1
+MVC model1 och12
+and model2 och16 -> MVC2 Repo
