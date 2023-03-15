@@ -140,6 +140,7 @@ public class MemberDao {
 		
 		String sql = "INSERT INTO member2 (id, passwd, name, address, tel, reg_date)"
                 + " VALUES (?, ?, ?, ?, ?, SYSDATE)";
+//		"INSERT INTO member2 (id, passwd, name, address, tel, reg_date) VALUES (?, ?, ?, ?, ?, SYSDATE)"; 이렇게 해도 돼		
 		//oracle의 sysdate가 들어가, pc시간이 아니라
 //		ResultSet rs = null;
 		
@@ -186,23 +187,13 @@ public class MemberDao {
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		
-		String serverSaveFilename = "";
-		String upLoadFilename = "";
-//		request.setCharacterEncoding("utf-8");
-		int maxSize = 5 * 1024 * 1024; //5메가
-		String fileSave = "/fileSave";
-		String realPath = getServletContext().getRealPath(fileSave);
-		System.out.println("realPath -> " + realPath);
-	
-		
-		String sql = "INSERT INTO member2 (id, passwd, name, address, tel, reg_date, img_path)"
-                + " VALUES (?, ?, ?, ?, ?, SYSDATE)";
-		//oracle의 sysdate가 들어가, pc시간이 아니라
-//		ResultSet rs = null;
-		
-		//UpLoad
-		MultipartRequest multi = new MultipartRequest(request, realPath, maxSize, "utf-8", new DefaultFileRenamePolicy());
+//		String sql = "INSERT INTO member2 (id, passwd, name, address, tel, reg_date)"
+//        + " VALUES (?, ?, ?, ?, ?, SYSDATE)";
+		String sql = "INSERT INTO member2 VALUES (?, ?, ?, ?, ?, SYSDATE, ?)";
+		System.out.println("insert3 sql -> " + sql);
+		System.out.println("insert3 getId -> " + memberDto.getId());
+		System.out.println("insert3 getName -> " + memberDto.getName());
+		System.out.println("insert3 getPasswd -> " + memberDto.getPasswd());
 		
 		try {
 			// 1. DBCP 이용 /ch10 11 참고
@@ -213,7 +204,7 @@ public class MemberDao {
 			pstmt.setString(3, memberDto.getName());
 			pstmt.setString(4, memberDto.getAddress());
 			pstmt.setString(5, memberDto.getTel());
-//			pstmt.setSti(, memberDto.getTel());
+			pstmt.setString(6, memberDto.getImg_path());
 			
 			//  Member2 진짜 Insert
 			result = pstmt.executeUpdate();
@@ -226,12 +217,9 @@ public class MemberDao {
 			
 			
 		} catch (Exception e) {
-			// e.printStackTrace();
+			e.printStackTrace();
 			System.out.println(e.getMessage());
 		} finally {
-//			if(rs != null) {
-//				rs.close();
-//			}
 			if(pstmt != null) {
 				pstmt.close();
 			}
@@ -245,10 +233,10 @@ public class MemberDao {
 	
 	
 	
-	private Object getServletContext() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	private Object getServletContext() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 	/* 내가 한 답, 이것도 맞아 나는 while, 밑에는 do-while */
 	/*
@@ -323,8 +311,8 @@ public class MemberDao {
 		            md.setReg_date(rs.getDate("reg_date"));
 		            list.add(md);			
 				
-			} while(rs.next());
-			System.out.println("rs => " +rs);
+				} while(rs.next());
+				System.out.println("rs => " +rs);
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -440,11 +428,14 @@ public class MemberDao {
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
+			System.out.println("getPasswd -> " + memberDto.getPasswd());
 			pstmt.setString(1, memberDto.getPasswd());
+			System.out.println("getName -> " + memberDto.getName());
 			pstmt.setString(2, memberDto.getName());
 			pstmt.setString(3, memberDto.getAddress());
 			pstmt.setString(4, memberDto.getTel());
 			pstmt.setString(5, memberDto.getId());
+			System.out.println("getId -> " + memberDto.getId());
 			
 			result = pstmt.executeUpdate();
 			
@@ -465,6 +456,7 @@ public class MemberDao {
 				conn.close();
 			}
 		}
+		System.out.println("DAO result -> " + result);
 		return result;
 	}
 

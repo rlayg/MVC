@@ -23,7 +23,7 @@
 		
 	%>
 	<h2>회원정보 수정</h2>
-	<form action="updatePro.jsp">
+	<form action="updatePro3.jsp" name="frm" onsubmit="return chk()" method="post" enctype="multipart/form-data"> 
 		<table border="1" id="table">
 			<tr>
 				<td>아이디</td>

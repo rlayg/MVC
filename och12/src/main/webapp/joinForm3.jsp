@@ -44,7 +44,7 @@
 </head>
 <body>
 	<h2>회원가입3(img_path)</h2>
-	<form action="joinPro3.jsp" name="frm" onsubmit="return chk()" method="post" enctype="multipart/form-dat">
+	<form action="joinPro3.jsp" name="frm" onsubmit="return chk()" method="post" enctype="multipart/form-data">
 		<table border="1">
 			<tr>
 				<td>아이디</td>
